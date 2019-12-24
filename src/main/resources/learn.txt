@@ -1,0 +1,16 @@
+  排除非表字段的三种解决方式
+ 1. 设置关键字 transient (使用这种关键字，序列化的是时候会被排除)
+ 2. @TableField(exist=false)
+ 3. static （lombok默认不会设置get set方法）
+
+ 通过id查询
+
+ 通过map查询
+
+ 通过条件构造器查询
+
+ selec不列出全部字段
+
+ condition（执行条件）的作用 true 加入; false 不加入
+
+ 创建条件构造器时传入实体对象
