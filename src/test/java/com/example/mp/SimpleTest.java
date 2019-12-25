@@ -1,7 +1,10 @@
 package com.example.mp;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.example.mp.dao.UserMapper;
 import com.example.mp.entity.User;
 import org.junit.Assert;
@@ -10,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -111,7 +115,7 @@ public class SimpleTest {
         queryWapper
                 .like("name", "雨")
                 .lt("age", 40)
-                .select(User.class, info -> !info.getColumn().equals("create_time")&&
+                .select(User.class, info -> !info.getColumn().equals("create_time") &&
                         !info.getColumn().equals("manager_id")
                 );
         userMapper.selectList(queryWapper);
@@ -145,13 +149,13 @@ public class SimpleTest {
      * condition(条件) 的作用
      */
     @Test
-    public void testCondition(){
+    public void testCondition() {
         String name = "王";
         String email = "";
         condition(name, email);
     }
 
-    private void condition(String name, String email){
+    private void condition(String name, String email) {
         QueryWrapper<User> queryWapper = new QueryWrapper<User>();
 
         // .like(condition, column, value)
@@ -181,4 +185,56 @@ public class SimpleTest {
         theUserList.forEach(System.out::println);
     }
 
+    /**
+     * lambda
+     */
+    @Test
+    public void selectLambda(){
+        //1
+        LambdaQueryWrapper<User> lambda = new QueryWrapper<User>().lambda();
+        //2
+        LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
+        //3
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+        lambdaQuery.like(User::getName, "雨").lt(User::getAge, 40);
+        List<User> lambdaUL = userMapper.selectList(lambdaQuery);
+        lambdaUL.forEach(System.out::println);
+    }
+
+    @Test
+    public void selectLambda2(){
+        //3
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+        lambdaQuery.like(User::getName, "王")
+                .and(lqw -> lqw.lt(User::getAge, 40))
+                .or().isNotNull(User::getEmail);
+        List<User> lambdaUL = userMapper.selectList(lambdaQuery);
+        lambdaUL.forEach(System.out::println);
+    }
+
+    /**
+     * 3.7新增的方法
+     */
+    @Test
+    public void selectLambda3(){
+        List<User> list = new LambdaQueryChainWrapper<User>(userMapper)
+                .like(User::getName, "雨")
+                .ge(User::getAge, 20)
+                .list();
+        list.forEach(System.out::println);
+    }
+
+    /**
+     * 自定义方法测试
+     */
+    @Test
+    public void selectLambda4(){
+        //3
+        LambdaQueryWrapper<User> lambdaQuery = Wrappers.<User>lambdaQuery();
+        lambdaQuery.like(User::getName, "王")
+                .and(lqw -> lqw.lt(User::getAge, 40))
+                .or().isNotNull(User::getEmail);
+        List<User> lambdaUL = userMapper.selectAll(lambdaQuery);
+        lambdaUL.forEach(System.out::println);
+    }
 }
