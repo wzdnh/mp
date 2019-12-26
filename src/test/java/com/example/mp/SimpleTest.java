@@ -2,9 +2,11 @@ package com.example.mp;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mp.dao.UserMapper;
 import com.example.mp.entity.User;
 import org.junit.Assert;
@@ -237,4 +239,26 @@ public class SimpleTest {
         List<User> lambdaUL = userMapper.selectAll(lambdaQuery);
         lambdaUL.forEach(System.out::println);
     }
+
+
+    /**
+     * @Description: 分页查询
+     * @Author: chenzheng
+     * @Date: 2019/12/26 11:27
+     * @Return: void
+     */
+    @Test
+    public void selectPage(){
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        //(当前页数，每页条数)
+        Page<User> page = new Page<>(1,4);
+        queryWrapper.ge("age", 26);
+        IPage<User> iPage = userMapper.selectPage(page, queryWrapper);
+        System.out.println("总页数" + iPage.getPages());
+        System.out.println("总记录数" + iPage.getTotal());
+        List<User> userList = iPage.getRecords();
+        userList.forEach(System.out::println);
+    }
+    
+
 }
