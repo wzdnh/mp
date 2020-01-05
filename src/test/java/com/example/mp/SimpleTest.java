@@ -102,8 +102,6 @@ public class SimpleTest {
 
     /**
      * 根据条件构造器QueryWrapper 查询
-     *
-     * @param: queryWrapper 条件构造器
      * 如 like eq
      */
     @Test
