@@ -14,3 +14,15 @@
  condition（执行条件）的作用 true 加入; false 不加入
 
  创建条件构造器时传入实体对象
+
+ lambda 有三种写法
+ lambda的好处，防误写 可以在编译时就发现错误，因为使用的是对象：：属性
+
+ 3.7新增了一个方法
+ new LambdaQueryChainWrapper<User>(userMapper)
+                 .like(User::getName, "雨")
+                 .list();
+
+ 自定义SQL（版本大于等于3.0.7）
+
+ 其他使用条件构造器的方法

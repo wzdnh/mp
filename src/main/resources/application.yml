@@ -16,3 +16,8 @@ logging:
   #格式 %p日志级别  %m日志内容 %n换行
   pattern:
     console: '%p%m%n'
+
+#配置扫描xml文件
+mybatis-plus:
+  mapper-locations:
+  - com/example/mp/mapper/*
