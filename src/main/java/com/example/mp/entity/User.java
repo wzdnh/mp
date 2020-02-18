@@ -2,9 +2,11 @@ package com.example.mp.entity;
 
 import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.concurrent.locks.Condition;
@@ -15,8 +17,9 @@ import java.util.concurrent.locks.Condition;
  **/
 
 @Data
-public class User {
+public class User implements Serializable {
 
+    @TableId
     private Long id;
     @TableField(condition= "%s&lt;&gt;#{%s}")
     private String name;

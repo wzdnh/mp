@@ -614,7 +614,4 @@ public class SimpleTest {
         System.out.println("影响记录数" + rows);
     }
 
-
-
-
 }
