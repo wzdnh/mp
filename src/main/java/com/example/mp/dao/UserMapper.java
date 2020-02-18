@@ -18,7 +18,7 @@ import java.util.List;
  * @Date: 2019/12/24 21:23
  * @description 使用条件构造器的自定义方法
  **/
-//@CacheNamespace
+@CacheNamespace
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 

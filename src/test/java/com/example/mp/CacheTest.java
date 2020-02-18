@@ -169,9 +169,10 @@ public class CacheTest {
         user1.setName("cishi1");
         userService.addUser(user1);
         User user2 = new User();
-        user2.setId(1087982257332887553L);
+        user2.setId(1087982257332887553L); //添加重复id
         user2.setName("ceshi2");
         userService.addUser(user2);
     }
+
 
 }
