@@ -12,7 +12,7 @@ import com.baomidou.mybatisplus.extension.conditions.update.LambdaUpdateChainWra
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mp.dao.UserMapper;
 import com.example.mp.entity.User;
-import com.example.mp.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,24 +25,20 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 
 /**
  * @Author: 帅帅的阿政
  * @Date: 2019/12/24 21:25
- * @description MP入门
+ * @description MP入门，MP的使用
  **/
-
+@Slf4j
 @RunWith(SpringRunner.class)    //运行器
 @SpringBootTest
 public class SimpleTest {
 
     @Autowired
     private UserMapper userMapper;
-    @Autowired
-    private UserService userService;
 
     /**
      * 二 基本使用
@@ -619,21 +615,6 @@ public class SimpleTest {
     }
 
 
-    /**
-     * @Description:
-     * @Author: chenzheng
-     * @Date: 2020/2/17 16:35
-     * @param: null
-     * @Return:
-     */
-    @Test
-    public void testCache() {
 
-        ThreadPoolExecutor executorsUtil = new ThreadPoolExecutor(10, 20, 5,
-                TimeUnit.SECONDS, new executorsUtil.execute(()->{
-            for (int j = 0; j < 10; j++) {
-                userService.get();
-            }
-        });
-    }
+
 }

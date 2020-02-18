@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.example.mp.entity.User;
+import org.apache.ibatis.annotations.CacheNamespace;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -17,6 +18,7 @@ import java.util.List;
  * @Date: 2019/12/24 21:23
  * @description 使用条件构造器的自定义方法
  **/
+//@CacheNamespace
 @Repository
 public interface UserMapper extends BaseMapper<User> {
 

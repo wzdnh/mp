@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 /**
- * <p>[文件描述]：业务接口实现类</p >
+ * <p>[文件描述]：业务接口实现类-不带事务注解</p >
  *
  * @author chenzheng
  * @data 2020/2/17 16:43
  */
 @Slf4j
-@Service
+@Service("userService")
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> get() {
+        log.info("--------------查询");
         return userMapper.selectList(null);
     }
 
