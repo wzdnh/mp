@@ -26,3 +26,16 @@ VALUES (1087982257332887553, '大boss', 40, 'boss@baomidou.com', NULL
 		, '2019-01-14 09:15:15'),
 	(1094592041087729666, '刘红雨', 32, 'lhm@baomidou.com', 1088248166370832385
 		, '2019-01-14 09:48:16');
+
+#汽车表
+create table if not exists car(
+    id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '主键',
+    name VARCHAR(20) COMMENT '车牌号'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+#用户汽车表
+create table if not exists user_car(
+    id BIGINT(20) PRIMARY KEY NOT NULL COMMENT '主键',
+    uid BIGINT(20) NOT NULL COMMENT '用户id',
+    cid BIGINT(20) NOT NULL COMMENT '汽车id'
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;

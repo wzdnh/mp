@@ -165,6 +165,19 @@ public class SimpleTest {
         System.out.println("返回的是影响的记录数" + rows);
     }
 
+    /**
+     * 测试自动填充
+     */
+    @Test
+    public void test(){
+        User user = new User();
+        user.setName("cz test insert fill");
+        userMapper.insert(user);
+
+       User myUser = userMapper.selectOne( (new QueryWrapper<User>().lambda().eq(User::getName, "cz test insert fill")));
+       log.info(myUser.toString());
+    }
+
 
     /**
      * condition(条件) 的作用
@@ -425,21 +438,21 @@ public class SimpleTest {
     /**
      * 分页 2
      * 使用map
-     * 有点bug后期在解决了
      */
     @Test
     public void selectPage2() {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.ge("age", 26);
         //(当前页数，每页条数)
-        Page<User> page = new Page<>(1, 2);
-        /*
+        //Page<User> page = new Page<>(1, 2);
+        Page page = new Page(1, 4);
+
         IPage<Map<String, Object>> iPage = userMapper.selectMapsPage(page, queryWrapper);
         System.out.println("总页数" + iPage.getPages());
         System.out.println("总记录数" + iPage.getTotal());
         List<Map<String, Object>> userList = iPage.getRecords();
         userList.forEach(System.out::println);
-        */
+
     }
 
 

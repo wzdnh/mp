@@ -1,11 +1,13 @@
 package com.example.mp.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 
 /**
  * @Author: 帅帅的阿政
@@ -19,9 +21,10 @@ public class User implements Serializable {
     private Long id;
     @TableField(condition= "%s&lt;&gt;#{%s}")
     private String name;
+    @TableField(fill = FieldFill.INSERT)
     private Integer age;
     private String email;
     private Long managerId;
+    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
-
 }
